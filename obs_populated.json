@@ -1,0 +1,1747 @@
+{
+  "day_0_turn_0_step_0": {
+    "remainingOverageTime": 60,
+    "step": 0,
+    "player": 0,
+    "farms": [
+      {
+        "money": 3000.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          4,
+          4
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 0
+      },
+      {
+        "money": 3000.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          4,
+          4
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 0
+      }
+    ],
+    "private": {
+      "shed": {
+        "WHEAT": 0,
+        "CARROT": 0,
+        "TOMATO": 0,
+        "STRAWBERRY": 0,
+        "MELON": 0,
+        "EGG": 0,
+        "MILK": 0,
+        "WOOL": 0,
+        "FERTILIZER": 0,
+        "GOOSE": 0,
+        "COW": 0,
+        "SHEEP": 0
+      },
+      "seeds": {
+        "WHEAT": 0,
+        "CARROT": 0,
+        "TOMATO": 0,
+        "STRAWBERRY": 0,
+        "MELON": 0
+      },
+      "inventories": [
+        {}
+      ]
+    },
+    "market": {
+      "inventory": {
+        "WHEAT": 10000,
+        "CARROT": 10000,
+        "TOMATO": 10000,
+        "STRAWBERRY": 10000,
+        "MELON": 10000,
+        "EGG": 10000,
+        "MILK": 10000,
+        "WOOL": 10000,
+        "FERTILIZER": 10000
+      },
+      "prices": {
+        "WHEAT": 25,
+        "CARROT": 35,
+        "TOMATO": 60,
+        "STRAWBERRY": 120,
+        "MELON": 250,
+        "EGG": 50,
+        "MILK": 160,
+        "WOOL": 200,
+        "FERTILIZER": 100
+      }
+    },
+    "town": {
+      "unlocked_shops": []
+    },
+    "day": 0,
+    "hour": 0
+  },
+  "day_0_turn_23_step_23": {
+    "remainingOverageTime": 60,
+    "step": 23,
+    "player": 0,
+    "farms": [
+      {
+        "money": 2489.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            {
+              "kind": "COOP"
+            },
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 0,
+              "watered_today": false,
+              "consecutive_unwatered": 1,
+              "yield_units": 1,
+              "max_lifespan_step": 96,
+              "fertilized_until_day": -1
+            },
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          1,
+          1
+        ],
+        "hands": [
+          [
+            4,
+            4
+          ]
+        ],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 1
+      },
+      {
+        "money": 2960.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 0,
+              "watered_today": true,
+              "consecutive_unwatered": 1,
+              "yield_units": 1,
+              "max_lifespan_step": 96,
+              "fertilized_until_day": -1
+            },
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          4,
+          4
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 0
+      }
+    ],
+    "private": {
+      "shed": {
+        "WHEAT": 0,
+        "CARROT": 0,
+        "TOMATO": 0,
+        "STRAWBERRY": 0,
+        "MELON": 0,
+        "EGG": 0,
+        "MILK": 0,
+        "WOOL": 0,
+        "FERTILIZER": 0,
+        "GOOSE": 1,
+        "COW": 0,
+        "SHEEP": 0
+      },
+      "seeds": {
+        "WHEAT": 5,
+        "CARROT": 2,
+        "TOMATO": 2,
+        "STRAWBERRY": 0,
+        "MELON": 0
+      },
+      "inventories": [
+        {},
+        {}
+      ]
+    },
+    "market": {
+      "inventory": {
+        "WHEAT": 9999,
+        "CARROT": 9999,
+        "TOMATO": 9999,
+        "STRAWBERRY": 9999,
+        "MELON": 9999,
+        "EGG": 9999,
+        "MILK": 9999,
+        "WOOL": 9999,
+        "FERTILIZER": 10000
+      },
+      "prices": {
+        "WHEAT": 26,
+        "CARROT": 35,
+        "TOMATO": 60,
+        "STRAWBERRY": 128,
+        "MELON": 256,
+        "EGG": 50,
+        "MILK": 169,
+        "WOOL": 206,
+        "FERTILIZER": 100
+      }
+    },
+    "town": {
+      "unlocked_shops": []
+    },
+    "day": 0,
+    "hour": 23
+  },
+  "day_1_turn_23_step_47": {
+    "remainingOverageTime": 60,
+    "step": 47,
+    "player": 0,
+    "farms": [
+      {
+        "money": 2354.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            {
+              "kind": "COOP"
+            },
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 1,
+              "watered_today": false,
+              "consecutive_unwatered": 1,
+              "yield_units": 1,
+              "max_lifespan_step": 120,
+              "fertilized_until_day": -1
+            },
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          1,
+          1
+        ],
+        "hands": [
+          [
+            4,
+            4
+          ]
+        ],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 1
+      },
+      {
+        "money": 2960.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 0,
+              "watered_today": true,
+              "consecutive_unwatered": 0,
+              "yield_units": 1,
+              "max_lifespan_step": 96,
+              "fertilized_until_day": -1
+            },
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          4,
+          4
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 0
+      }
+    ],
+    "private": {
+      "shed": {
+        "WHEAT": 5,
+        "CARROT": 0,
+        "TOMATO": 0,
+        "STRAWBERRY": 0,
+        "MELON": 0,
+        "EGG": 0,
+        "MILK": 0,
+        "WOOL": 0,
+        "FERTILIZER": 0,
+        "GOOSE": 1,
+        "COW": 0,
+        "SHEEP": 0
+      },
+      "seeds": {
+        "WHEAT": 5,
+        "CARROT": 1,
+        "TOMATO": 2,
+        "STRAWBERRY": 0,
+        "MELON": 0
+      },
+      "inventories": [
+        {},
+        {}
+      ]
+    },
+    "market": {
+      "inventory": {
+        "WHEAT": 9993,
+        "CARROT": 9998,
+        "TOMATO": 9998,
+        "STRAWBERRY": 9998,
+        "MELON": 9998,
+        "EGG": 9998,
+        "MILK": 9998,
+        "WOOL": 9998,
+        "FERTILIZER": 10000
+      },
+      "prices": {
+        "WHEAT": 28,
+        "CARROT": 35,
+        "TOMATO": 60,
+        "STRAWBERRY": 132,
+        "MELON": 260,
+        "EGG": 50,
+        "MILK": 172,
+        "WOOL": 209,
+        "FERTILIZER": 100
+      }
+    },
+    "town": {
+      "unlocked_shops": []
+    },
+    "day": 1,
+    "hour": 23
+  },
+  "day_2_turn_23_step_71": {
+    "remainingOverageTime": 60,
+    "step": 71,
+    "player": 0,
+    "farms": [
+      {
+        "money": 1353.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            {
+              "kind": "COOP"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 2,
+              "watered_today": false,
+              "consecutive_unwatered": 1,
+              "yield_units": 1,
+              "max_lifespan_step": 144,
+              "fertilized_until_day": -1
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          1,
+          1
+        ],
+        "hands": [
+          [
+            4,
+            4
+          ]
+        ],
+        "unlocked_quadrants": [
+          "NW",
+          "NE"
+        ],
+        "hires_today": 1
+      },
+      {
+        "money": 2960.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 0,
+              "watered_today": true,
+              "consecutive_unwatered": 0,
+              "yield_units": 2,
+              "max_lifespan_step": 96,
+              "fertilized_until_day": -1
+            },
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          4,
+          4
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 0
+      }
+    ],
+    "private": {
+      "shed": {
+        "WHEAT": 5,
+        "CARROT": 0,
+        "TOMATO": 0,
+        "STRAWBERRY": 0,
+        "MELON": 0,
+        "EGG": 0,
+        "MILK": 0,
+        "WOOL": 0,
+        "FERTILIZER": 0,
+        "GOOSE": 1,
+        "COW": 0,
+        "SHEEP": 0
+      },
+      "seeds": {
+        "WHEAT": 5,
+        "CARROT": 0,
+        "TOMATO": 2,
+        "STRAWBERRY": 0,
+        "MELON": 0
+      },
+      "inventories": [
+        {},
+        {}
+      ]
+    },
+    "market": {
+      "inventory": {
+        "WHEAT": 9992,
+        "CARROT": 9997,
+        "TOMATO": 9997,
+        "STRAWBERRY": 9997,
+        "MELON": 9997,
+        "EGG": 9997,
+        "MILK": 9997,
+        "WOOL": 9997,
+        "FERTILIZER": 10000
+      },
+      "prices": {
+        "WHEAT": 28,
+        "CARROT": 35,
+        "TOMATO": 60,
+        "STRAWBERRY": 135,
+        "MELON": 262,
+        "EGG": 50,
+        "MILK": 175,
+        "WOOL": 212,
+        "FERTILIZER": 100
+      }
+    },
+    "town": {
+      "unlocked_shops": []
+    },
+    "day": 2,
+    "hour": 23
+  },
+  "final_state_step_95": {
+    "remainingOverageTime": 60,
+    "step": 95,
+    "player": 0,
+    "farms": [
+      {
+        "money": 1490.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            {
+              "kind": "COOP"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "WEED"
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          1,
+          1
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW",
+          "NE"
+        ],
+        "hires_today": 0
+      },
+      {
+        "money": 2940.0,
+        "tiles": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            {
+              "kind": "PLANT",
+              "crop": "CARROT",
+              "planted_day": 3,
+              "watered_today": true,
+              "consecutive_unwatered": 1,
+              "yield_units": 1,
+              "max_lifespan_step": 168,
+              "fertilized_until_day": -1
+            },
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ],
+          [
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED",
+            "LOCKED"
+          ]
+        ],
+        "farmer": [
+          4,
+          4
+        ],
+        "hands": [],
+        "unlocked_quadrants": [
+          "NW"
+        ],
+        "hires_today": 0
+      }
+    ],
+    "private": {
+      "shed": {
+        "WHEAT": 0,
+        "CARROT": 0,
+        "TOMATO": 0,
+        "STRAWBERRY": 0,
+        "MELON": 0,
+        "EGG": 0,
+        "MILK": 0,
+        "WOOL": 0,
+        "FERTILIZER": 0,
+        "GOOSE": 1,
+        "COW": 0,
+        "SHEEP": 0
+      },
+      "seeds": {
+        "WHEAT": 5,
+        "CARROT": 0,
+        "TOMATO": 2,
+        "STRAWBERRY": 0,
+        "MELON": 0
+      },
+      "inventories": [
+        {}
+      ]
+    },
+    "market": {
+      "inventory": {
+        "WHEAT": 9996,
+        "CARROT": 9996,
+        "TOMATO": 9996,
+        "STRAWBERRY": 9996,
+        "MELON": 9996,
+        "EGG": 9996,
+        "MILK": 9996,
+        "WOOL": 9984,
+        "FERTILIZER": 10000
+      },
+      "prices": {
+        "WHEAT": 27,
+        "CARROT": 35,
+        "TOMATO": 60,
+        "STRAWBERRY": 137,
+        "MELON": 264,
+        "EGG": 50,
+        "MILK": 177,
+        "WOOL": 224,
+        "FERTILIZER": 100
+      }
+    },
+    "town": {
+      "unlocked_shops": [
+        "YARN_STORE"
+      ]
+    },
+    "day": 3,
+    "hour": 23
+  }
+}
