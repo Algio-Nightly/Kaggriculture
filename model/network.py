@@ -13,7 +13,7 @@ class SpatialEncoder(nnx.Module):
     Used as a Siamese shared-weights encoder for both Own Farm and Opponent Farm.
     """
 
-    def __init__(self, in_channels: int = 19, features: int = 64, *, rngs: nnx.Rngs):
+    def __init__(self, in_channels: int = 21, features: int = 64, *, rngs: nnx.Rngs):
         self.conv1 = nnx.Conv(in_features=in_channels, out_features=32, kernel_size=(3, 3), padding="SAME", rngs=rngs)
         self.conv2 = nnx.Conv(in_features=32, out_features=64, kernel_size=(3, 3), padding="SAME", rngs=rngs)
         self.conv3 = nnx.Conv(in_features=64, out_features=features, kernel_size=(3, 3), padding="SAME", rngs=rngs)
@@ -22,16 +22,16 @@ class SpatialEncoder(nnx.Module):
         x = nnx.relu(self.conv1(x))
         x = nnx.relu(self.conv2(x))
         x = nnx.relu(self.conv3(x))
-        # Flatten spatial dimensions (10 * 10 * features)
+        # Flatten spatial dimensions (10 * 10 * features = 6400)
         return x.reshape((*x.shape[:-3], -1))
 
 
 class GlobalEncoder(nnx.Module):
     """
-    MLP backbone to process global scalar features (market prices, inventory, time, money).
+    MLP backbone to process global scalar features (market prices, inventory, time, money, town product demand).
     """
 
-    def __init__(self, in_features: int = 38, hidden_dim: int = 128, *, rngs: nnx.Rngs):
+    def __init__(self, in_features: int = 47, hidden_dim: int = 128, *, rngs: nnx.Rngs):
         self.dense1 = nnx.Linear(in_features=in_features, out_features=hidden_dim, rngs=rngs)
         self.dense2 = nnx.Linear(in_features=hidden_dim, out_features=hidden_dim, rngs=rngs)
 
@@ -46,8 +46,8 @@ class ActorCriticNet(nnx.Module):
     Dual-Tower Siamese Actor-Critic Network in Flax NNX for Kaggriculture.
     
     Architecture:
-    1. Spatial Branch A (Own Farm): 2D-CNN extracts 10x10x19 grid features -> Own Spatial Embedding (6400)
-    2. Spatial Branch B (Opponent Farm): Siamese 2D-CNN extracts 10x10x19 grid features -> Opponent Spatial Embedding (6400)
+    1. Spatial Branch A (Own Farm): 2D-CNN extracts 10x10x21 grid features -> Own Spatial Embedding (6400)
+    2. Spatial Branch B (Opponent Farm): Siamese 2D-CNN extracts 10x10x21 grid features -> Opponent Spatial Embedding (6400)
     3. Scalar Branch: MLP extracts Global Market/State features -> Global Embedding (128)
     4. Late Fusion: Concatenates (Own Embedding + Opponent Embedding + Global Embedding) = 12928 -> Latent (256)
     5. Heads: Policy Network (Actor) & State Value Network (Critic)
@@ -55,8 +55,8 @@ class ActorCriticNet(nnx.Module):
 
     def __init__(
         self,
-        grid_channels: int = 19,
-        global_features: int = 38,
+        grid_channels: int = 21,
+        global_features: int = 47,
         num_farmer_actions: int = 15,
         hidden_dim: int = 256,
         *,
