@@ -20,9 +20,9 @@ This document tracks the implementation status of all components for the Kaggric
 - [x] **Adaptive Logit & Gradient Masking**:
   - **Forward Pass Logit Masking**: Suppresses illegal combinations via $-10^9$ logit penalty.
   - **Backward Pass Gradient Masking**: Masks out loss on inactive parameter heads to prevent noisy weight updates.
-- [ ] **Daily Decision Cadence**: Evaluates the board once per in-game day (every 24 turns) to generate macro-plans for Action Scripts.
-- [ ] **The Actor Critic Cycle**: Single-step and multi-step rollout prediction for Policy ($\pi_\theta$) and Value ($V_\phi$).
-- [ ] **Inference Architecture & Kaggle Entrypoint**: Production `agent(obs)` function for live Kaggle competition submission (`main.py`).
+- [x] **Daily Decision Cadence**: Evaluates the board once per in-game day (every 24 turns) to generate macro-plans for Action Scripts.
+- [x] **The Actor Critic Cycle**: Single-step and multi-step rollout prediction for Policy ($\pi_\theta$) and Value ($V_\phi$).
+- [x] **Inference Architecture & Kaggle Entrypoint**: Production `agent(obs)` function for live Kaggle competition submission (`main.py`).
 
 ---
 
