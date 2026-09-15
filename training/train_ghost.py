@@ -110,13 +110,14 @@ def ppo_update_step(
 
 
 def run_ghost_play_training(
+    model:ActorCriticNet,
     replay_dir: str = DEFAULT_REPLAY_DIR,
     episodes: int = 20,
     steps_per_episode: int = 720,
     learning_rate: float = 3e-4,
     checkpoint_dir: str = DEFAULT_CHECKPOINT_DIR,
     seed: int = 42,
-) -> ActorCriticNet:
+    ) -> ActorCriticNet:
     """
     Runs Phase 2 Ghost-Play RL against available replay datasets.
     """
@@ -141,7 +142,6 @@ def run_ghost_play_training(
     print(f"Ghost-Play Training initialized with {len(replay_files)} ghost opponent files.")
 
     # 2. Instantiate Model and Optimizer
-    model = ActorCriticNet(rngs=rngs)
     optimizer = nnx.Optimizer(model, optax.adamw(learning_rate=learning_rate), wrt=nnx.Param)
 
     key = jax.random.PRNGKey(seed)
@@ -152,7 +152,7 @@ def run_ghost_play_training(
         ghost_opponent = GhostReplayOpponent(rep_file, ghost_player_idx=1)
         ghost_env = GhostPlayEnvironment(
             ghost_opponent,
-            living_penalty=0.05,
+            # living_penalty=0.05,
             episode_steps=steps_per_episode,
         )
 
