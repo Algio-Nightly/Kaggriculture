@@ -58,10 +58,11 @@ def encode_farm_grid(farm: Dict[str, Any], day: int) -> np.ndarray:
     20: Hired Hands Count (float count)
     """
     grid = np.zeros((GRID_SIZE, GRID_SIZE, FARM_GRID_CHANNELS), dtype=np.float32)
+    tiles = farm.get("tiles", [[None]*GRID_SIZE for _ in range(GRID_SIZE)])
 
     for y in range(GRID_SIZE):
         for x in range(GRID_SIZE):
-            tile = farm["tiles"][y][x]
+            tile = tiles[y][x] if y < len(tiles) and x < len(tiles[y]) else None
             if tile is None:
                 grid[y, x, 0] = 1.0
             elif tile == "LOCKED":
@@ -88,12 +89,16 @@ def encode_farm_grid(farm: Dict[str, Any], day: int) -> np.ndarray:
                     grid[y, x, 18] = float(tile.get("yield_units", 0)) / 6.0
 
     # Main Farmer Position (Channel 19)
-    fx, fy = farm["farmer"]
-    grid[fy, fx, 19] = 1.0
+    fx, fy = farm.get("farmer", [4, 4])
+    if 0 <= fy < GRID_SIZE and 0 <= fx < GRID_SIZE:
+        grid[fy, fx, 19] = 1.0
 
     # Hired Hands Positions (Channel 20)
-    for hx, hy in farm.get("hands", []):
-        grid[hy, hx, 20] += 1.0
+    for h_pos in farm.get("hands", []):
+        if len(h_pos) >= 2:
+            hx, hy = h_pos[0], h_pos[1]
+            if 0 <= hy < GRID_SIZE and 0 <= hx < GRID_SIZE:
+                grid[hy, hx, 20] += 1.0
 
     return grid
 
@@ -110,13 +115,14 @@ def encode_observation(obs: Dict[str, Any]) -> Tuple[jnp.ndarray, jnp.ndarray, j
         opp_grid_tensor: Array of shape (10, 10, 21) representing opponent farm state.
         global_tensor: Array of shape (47,) representing non-spatial scalar state.
     """
-    player = obs["player"]
-    me = obs["farms"][player]
-    opponent = obs["farms"][1 - player]
-    private = obs["private"]
-    market = obs["market"]
+    player = obs.get("player", 0)
+    farms = obs.get("farms", [])
+    me = farms[player] if len(farms) > player else (farms[0] if farms else {})
+    opponent = farms[1 - player] if len(farms) > (1 - player) else me
+    private = obs.get("private", {})
+    market = obs.get("market", {})
     town = obs.get("town", {})
-    day = obs["day"]
+    day = obs.get("day", 0)
 
     # 1. Construct Dual 10x10 Spatial Feature Grids (21 channels each)
     own_grid = encode_farm_grid(me, day)
@@ -124,13 +130,17 @@ def encode_observation(obs: Dict[str, Any]) -> Tuple[jnp.ndarray, jnp.ndarray, j
 
     # 2. Construct Global Feature Vector (47 features total)
     # Timers, money, hire metrics (6 features)
+    day_val = float(obs.get("day", 0))
+    hour_val = float(obs.get("hour", 0))
+    step_val = float(obs.get("step", day_val * 24 + hour_val))
+
     globals_list = [
-        float(obs["day"]) / 30.0,
-        float(obs["hour"]) / 24.0,
-        float(obs["step"]) / 720.0,
-        float(me["money"]) / 1000.0,
-        float(opponent["money"]) / 1000.0,
-        float(me["hires_today"]) / 10.0,
+        day_val / 30.0,
+        hour_val / 24.0,
+        step_val / 720.0,
+        float(me.get("money", 0)) / 1000.0,
+        float(opponent.get("money", 0)) / 1000.0,
+        float(me.get("hires_today", 0)) / 10.0,
     ]
 
     # Market inventories and prices (9 + 9 = 18 features)

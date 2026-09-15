@@ -6,6 +6,8 @@ directly by RL action heads or rule-based orchestrators in 1 step of environment
 """
 from scripts.abs_level_1.pathfinding import (
     get_cardinal_direction_towards,
+    step_farmer_cardinal,
+    step_hand_cardinal,
     manhattan_distance,
     is_shed_adjacent,
     get_nearest_empty_tile,

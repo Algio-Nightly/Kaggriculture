@@ -43,6 +43,22 @@ def get_cardinal_direction_towards(from_pos: Tuple[int, int], to_pos: Tuple[int,
         return "SOUTH" if dy > 0 else "NORTH"
 
 
+def step_farmer_cardinal(direction: str) -> List[str]:
+    """Returns the 1-turn movement operation for the main farmer."""
+    direction = direction.upper()
+    if direction in ["NORTH", "SOUTH", "EAST", "WEST", "PASS"]:
+        return [direction]
+    return ["PASS"]
+
+
+def step_hand_cardinal(direction: str) -> List[str]:
+    """Returns the 1-turn movement operation for a hired hand."""
+    direction = direction.upper()
+    if direction in ["NORTH", "SOUTH", "EAST", "WEST", "PASS"]:
+        return [direction]
+    return ["PASS"]
+
+
 def get_nearest_shed_tile(from_pos: Tuple[int, int]) -> Tuple[int, int]:
     """Finds the nearest shed-adjacent tile from the given position."""
     return min(SHED_ADJACENT_TILES, key=lambda p: manhattan_distance(from_pos, p))

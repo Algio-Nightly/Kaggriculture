@@ -116,11 +116,13 @@ def compute_action_masks(obs: Dict[str, Any]) -> Dict[str, np.ndarray]:
     Returns:
         Dict mapping head names to boolean numpy arrays of shape (head_dim,).
     """
-    player = obs["player"]
-    me = obs["farms"][player]
+    player = obs.get("player", 0)
+    farms = obs.get("farms", [])
+    me = farms[player] if len(farms) > player else (farms[0] if farms else {})
     money = me.get("money", 0)
     day = obs.get("day", 0)
-    shed = obs["private"].get("shed", {})
+    private = obs.get("private", {})
+    shed = private.get("shed", {})
     unlocked_quads = me.get("unlocked_quadrants", ["NW"])
     
     total_shed_items = sum(shed.values())
@@ -179,8 +181,9 @@ def compute_action_masks(obs: Dict[str, Any]) -> Dict[str, np.ndarray]:
 
     # 6. Tactical Action Mask
     tactical_mask = np.ones(HEAD_DIMS["tactical"], dtype=bool)
-    fx, fy = me["farmer"]
-    tile = me["tiles"][fy][fx]
+    fx, fy = me.get("farmer", [4, 4])
+    tiles = me.get("tiles", [[None]*10 for _ in range(10)])
+    tile = tiles[fy][fx] if 0 <= fy < len(tiles) and 0 <= fx < len(tiles[0]) else None
     
     # Context-sensitive tactical validity
     is_plant = isinstance(tile, dict) and tile.get("kind") == "PLANT"
@@ -199,9 +202,9 @@ def compute_action_masks(obs: Dict[str, Any]) -> Dict[str, np.ndarray]:
         tactical_mask[TacticalAction.PLANT_WHEAT] = False
         tactical_mask[TacticalAction.PLANT_CARROT] = False
         tactical_mask[TacticalAction.BUILD_COOP] = False
-    if money < 10 or obs["private"].get("seeds", {}).get("WHEAT", 0) == 0:
+    if money < 10 or private.get("seeds", {}).get("WHEAT", 0) == 0:
         tactical_mask[TacticalAction.PLANT_WHEAT] = False
-    if money < 20 or obs["private"].get("seeds", {}).get("CARROT", 0) == 0:
+    if money < 20 or private.get("seeds", {}).get("CARROT", 0) == 0:
         tactical_mask[TacticalAction.PLANT_CARROT] = False
 
     return {

@@ -83,40 +83,52 @@ flowchart TD
 
 ## 4. Factored Multi-Discrete Action Space (The Brain)
 
-Instead of a combinatorial action space ($6 \times 5 \times 5 \times 6 \times 4 = 3,600$ flat classes), the policy branches into independent discrete heads:
+Instead of a monolithic combinatorial action space ($6 \times 5 \times 5 \times 6 \times 4 \times 15 = 54,000$ flat classes), the policy network decomposes the decision into **6 independent, factored discrete heads** branching from the latent vector $\mathbf{z} \in \mathbb{R}^{256}$:
 
-### 4.1. Head Definitions
-1. **Farming Strategy Head** ($K=6$):
-   - `SUSTAIN (0)`: Maintain existing crops/animals (daily watering, feeding, fertilizing, care).
-   - `EXPAND_CROPS (1)`: Purchase target seeds and expand crop coverage into empty tiles.
-   - `EXPAND_LIVESTOCK (2)`: Construct coop/pasture and purchase livestock.
-   - `HARVEST_ALL (3)`: Prioritize harvesting mature crops and transferring produce into the shed.
-   - `HOARD_RESOURCES (4)`: Stockpile harvested goods without immediate market sale.
-   - `IDLE (5)`: Conserve coins and pass optional activities.
-2. **Selling Strategy Head** ($K=5$):
-   - `HOLD (0)`: Hold shed inventory for future demand spikes or price increases.
-   - `DRIP_FEED_TOWN (1)`: Sell exact quantities consumed by active unlocked town shops.
-   - `MARKET_DUMP (2)`: Sell full shed inventory to the open dynamic market.
-   - `SELL_EXCESS (3)`: Sell stock exceeding safety reserves (e.g., maintain wheat for livestock).
-   - `EMERGENCY_CASH (4)`: Liquidate high-value assets to prevent bankruptcy or fund land purchase.
-3. **Crop Parameter Head** ($K=5$): `WHEAT (0)`, `CARROT (1)`, `TOMATO (2)`, `STRAWBERRY (3)`, `MELON (4)`.
-4. **Labor Parameter Head** ($K=6$): `HIRE_0 (0)` to `HIRE_5 (5)` daily hires based on the Fibonacci cost schedule.
-5. **Quadrant Parameter Head** ($K=4$): `NW (0)`, `NE (1)`, `SW (2)`, `SE (3)`.
-6. **Tactical Action Head** ($K=15$): Turn-level low-level actions (`PASS`, cardinal moves, tile actions).
+### 4.1. Factored Action Head Specifications
+
+| Head Name | Dim ($K$) | Output Type | Primary Role & Operational Meaning |
+| :--- | :--- | :--- | :--- |
+| **`farming`** | 6 | `FarmingStrategy` | Sets macro farming objective: `SUSTAIN (0)`, `EXPAND_CROPS (1)`, `EXPAND_LIVESTOCK (2)`, `HARVEST_ALL (3)`, `HOARD_RESOURCES (4)`, `IDLE (5)`. |
+| **`selling`** | 5 | `SellingStrategy` | Controls dynamic market selling posture: `HOLD (0)`, `DRIP_FEED_TOWN (1)`, `MARKET_DUMP (2)`, `SELL_EXCESS (3)`, `EMERGENCY_CASH (4)`. |
+| **`crop`** | 5 | `CropParam` | Argument for planting/buying: `WHEAT (0)` ($10), `CARROT (1)` ($20), `TOMATO (2)` ($30), `STRAWBERRY (3)` ($40), `MELON (4)` ($50). |
+| **`labor`** | 6 | `LaborParam` | Target number of daily hired hands: `HIRE_0 (0)` to `HIRE_5 (5)` evaluated against Fibonacci cost curve $[1, 1, 2, 3, 5, 8]$. |
+| **`quadrant`** | 4 | `QuadrantParam` | Target quadrant for land acquisition: `NW (0)` ($0), `NE (1)` ($1k), `SW (2)` ($2k), `SE (3)` ($4k). |9
+| **`tactical`** | 15 | `TacticalAction` | Micro turn-level farmer primitives: `PASS (0)`, `NORTH (1)`, `SOUTH (2)`, `EAST (3)`, `WEST (4)`, `WATER (5)`, `HARVEST (6)`, `FERTILIZE (7)`, `FEED (8)`, `CARE (9)`, `COLLECT_FERTILIZER (10)`, `DIG (11)`, `PLANT_WHEAT (12)`, `PLANT_CARROT (13)`, `BUILD_COOP (14)`. |
+
+---
+
+### 4.2. 1-Turn Synthesis into Abstraction Level 1 Action Scripts
+
+Every environment step $t$, the sampled decisions from these 6 heads are synthesized directly into legal [Abstraction Level 1 Action Scripts](file:///c:/Applications%20and%20Development/Kaggriculture/scripts/abs_level_1/):
+
+1. **Labor Dispatch**: If `labor > 0`, queues `queue_hire()` market orders matching the target count.
+2. **Land Acquisition**: If `quadrant > 0` and unbought, queues `queue_buy_land()`.
+3. **Market Posture**: Evaluates `selling`:
+   - `MARKET_DUMP`: Calls `queue_sell(crop, count)` for all shed items.
+   - `DRIP_FEED_TOWN`: Sells only amounts consumed by active town shops (`townShopSellInterval`).
+4. **Farming Operations**:
+   - `EXPAND_CROPS`: Queues `queue_buy_seed(chosen_crop, n)` and executes `plant_tile(chosen_crop)` on the nearest empty tile.
+   - `SUSTAIN` / `HARVEST_ALL`: Calls `water_tile()`, `harvest_tile()`, `feed_animal()`, or `drop_to_shed()`.
+5. **Farmer Navigation**: `tactical` cardinal decisions call `step_farmer_cardinal("NORTH" | "SOUTH" | "EAST" | "WEST")`.
 
 ---
 
 ## 5. Adaptive Masking Mechanics
 
-### 5.1. Forward Pass Logit Masking
-To prevent illegal action selection during rollout and inference, state-dependent boolean masks $M \in \{0, 1\}^K$ are computed in $O(1)$ from the observation. Invalid logits are suppressed via:
+### 5.1. Forward Pass Logit Masking (`compute_action_masks`)
+State-dependent boolean masks $M \in \{0, 1\}^K$ are computed in $O(1)$ from the observation:
 $$\hat{z}_k = \begin{cases} z_k & \text{if } M_k = 1 \\ -10^9 & \text{if } M_k = 0 \end{cases}$$
-Post-softmax, $P(\text{invalid}) = \frac{\exp(-10^9)}{\sum_j \exp(\hat{z}_j)} \equiv 0.0$.
+
+**Rule-Specific Masking Logic:**
+- **Seed & Maturity Validation**: Crop $c$ is masked out if $30 - \text{day} < \text{maturity}(c)$ (preventing planting crops that cannot mature before season end) or if $\text{money} < \text{cost}(c)$.
+- **Shed Capacity Validation**: `HARVEST_ALL` is masked if $\text{shed\_count} \ge 100$.
+- **Selling Validation**: Market sell strategies are masked if shed is empty ($\sum \text{items} = 0$).
+- **Labor & Land Validation**: Hires/Land purchases are masked if current bank balance is less than cumulative cost.
+- **Contextual Tactical Validation**: `WATER`/`HARVEST`/`FERTILIZE` are masked unless standing on a valid plant tile; `FEED`/`CARE`/`COLLECT` are masked unless on a coop/pasture.
 
 ### 5.2. Backward Pass Active-Head Gradient Masking
-When an argument head is inactive (for example, `Crop Parameter` is meaningless when `Farming Strategy` is `EXPAND_LIVESTOCK`), backpropagating cross-entropy loss would introduce noise into the head's weights. 
-
-We apply an active-head binary indicator weight $w_h \in \{0.0, 1.0\}$:
+When an argument head is inactive (e.g., `crop` head during `SUSTAIN` strategy), an active-head binary indicator weight $w_h \in \{0.0, 1.0\}$ blocks noisy gradient propagation:
 $$\mathcal{L}_{\text{total}} = \sum_{h \in \text{Heads}} w_h \cdot \mathcal{L}_{\text{CE}}(\hat{\mathbf{z}}^{(h)}, \mathbf{y}^{(h)})$$
 When $w_h = 0.0$, $\frac{\partial \mathcal{L}}{\partial \theta_h} = \mathbf{0}$, isolating parameter heads from cross-task interference.
 
@@ -124,8 +136,6 @@ When $w_h = 0.0$, $\frac{\partial \mathcal{L}}{\partial \theta_h} = \mathbf{0}$,
 
 ## 6. Verification and Integration
 
-The architecture was verified across four test suites in [tests/test_network.py](file:///c:/Applications%20and%20Development/Kaggriculture/tests/test_network.py):
-1. **Tensor Shape Verification**: Validated forward pass across $(B, 10, 10, 21)$, $(B, 10, 10, 21)$, and $(B, 47)$ returning all 6 head logits and $V(s) \in \mathbb{R}^B$.
-2. **Logit Masking Verification**: Verified that masked logits receive strictly 0.0 probability post-softmax.
-3. **Optax Training Step & Gradient Masking**: Executed an end-to-end forward/backward step with `optax.adamw` demonstrating clean gradient flow and loss minimization.
-4. **Kaggle Environment Agent Test**: Executed live `kaggle-environments` simulation turns verifying that the agent operates without exception.
+The complete neural architecture, action space, and Level 1 scripts are verified across automated test suites:
+1. **[tests/test_network.py](file:///c:/Applications%20and%20Development/Kaggriculture/tests/test_network.py)**: Forward shape verification, $-10^9$ logit masking, Optax AdamW gradient flow, and live simulation steps.
+2. **[tests/test_curriculum.py](file:///c:/Applications%20and%20Development/Kaggriculture/tests/test_curriculum.py)**: End-to-end integration covering $\Delta\text{NW}$ reward tracking, Phase 1 Behavioral Cloning, Phase 2 Ghost-Play PPO, and Phase 3 Self-Play League.

@@ -7,7 +7,7 @@ This document tracks the implementation status of all components for the Kaggric
 ## 1. Data Pipeline & Representation
 - [x] **Parser**: Raw Kaggle JSON observation dictionary traversal and inspection.
 - [x] **Encoder**: Dual-Tower spatial grid tensor generation (`10x10x21` for own and opponent farms) and global scalar vector generation (`47` normalized features including derived town shop demand rates).
-- [ ] `# Offline Replay Dataset Loader & Preprocessing`: Parse 224 replay JSON files into cached binary JAX datasets for fast pre-training.
+- [x] **Offline Replay Dataset Loader & Preprocessing**: Parse replay JSON files into cached binary JAX datasets for Phase 1 Behavioral Cloning (`training/dataset.py`).
 
 ---
 
@@ -34,17 +34,16 @@ This document tracks the implementation status of all components for the Kaggric
 ---
 
 ## 4. Rewards & Reward Shaping
-- [ ] **The Rewards**: Sparse season win/loss reward based on final bank money delta at turn 720 ($R_{720} = \text{money}_{\text{final}} - \text{opp\_money}_{\text{final}}$).
-- [ ] **Reward Pacing**: Dense turn-by-turn Net Worth delta shaping ($\Delta \text{Money} + \Delta \text{Shed Stock} + \Delta \text{Crop Assets}$) with penalties for unwatered crop decay or lost animals.
+- [x] **Delta Net Worth ($\Delta\text{NW}$) Engine**: Real-time monetary evaluation $NW_t = \text{Cash}_t + \text{ShedValue}_t + \text{FieldValue}_t + \text{SeedValue}_t$.
+- [x] **Step Reward & Living Penalty**: Dense turn reward $R_t = (NW_t - NW_{t-1}) - \lambda$ with penalty $\lambda = 0.05$.
+- [x] **Terminal Win Bonus**: Sparse outcome delta bonus at turn 720.
 
 ---
 
-## 5. Distributed Training Infrastructure
-- [ ] **The Learner Network**: Central JAX optimizer (Optax) maintaining master parameters $\theta_{\text{learner}}$ and computing PPO gradients.
-- [ ] **The Player Network**: Parallel rollout worker instances executing fast environment inference during data collection.
-- [ ] **The Supervised Training Loop and Scripts**: Behavioral Cloning pre-training on 224 offline replay files using Cross-Entropy loss before RL self-play.
-- [ ] **PPO Training Loop**: Proximal Policy Optimization with GAE-$\lambda$ advantage estimation, clipped surrogate loss, value MSE loss, and entropy bonus.
-- [ ] **Self Play Loop and Optimizations**: Historical opponent policy pool (league training) to prevent strategy cycling, with JAX vectorization optimizations (`jax.vmap` / `jax.lax.scan`).
+## 5. 3-Phase Training Progression
+- [x] **Phase 1: Pure Supervised Learning (Behavioral Cloning)**: Offline pre-training on 224 replay JSONs using Masked Categorical Cross-Entropy (Actor) and MSE vs. Final Coins (Critic) (`training/train_bc.py`).
+- [x] **Phase 2: Ghost-Play Reinforcement Learning**: Online PPO optimization against scripted historical replay trajectories on matching episode seeds (`training/ghost_env.py`).
+- [ ] **Phase 3: True Self-Play PPO League**: Evolutionary arms race training on randomized seeds against past self-play snapshots pool ($\pi_{t-50}$).
 
 ---
 

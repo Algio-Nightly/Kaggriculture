@@ -42,22 +42,49 @@ All scripts in `scripts/abs_level_1/` have been cross-referenced and validated a
 
 ---
 
-## 3. Parameter Schema Required for 1-Step Abstraction
+## 3. Pathfinding & Spatial Geometry Primitives (`scripts/abs_level_1/pathfinding.py`)
+
+Navigation and spatial awareness in Kaggriculture operate on a $10 \times 10$ discrete grid divided into four $5 \times 5$ quadrants (`NW`, `NE`, `SW`, `SE`). The pathfinding module provides 1-step reactive navigation without requiring multi-turn trajectory lock-in:
+
+### 3.1. Primitives & Functions
+
+| Function Name | Signature | Description & Algorithmic Role |
+| :--- | :--- | :--- |
+| **`step_farmer_cardinal`** | `(direction: str) -> List[str]` | Generates validated 1-step cardinal movement command for the main farmer (`["NORTH"]`, `["SOUTH"]`, `["EAST"]`, `["WEST"]`, `["PASS"]`). |
+| **`step_hand_cardinal`** | `(direction: str) -> List[str]` | Generates 1-step movement operation for a hired hand. |
+| **`manhattan_distance`** | `(pos_a: (x,y), pos_b: (x,y)) -> int` | Computes $L_1$ grid distance: $\|x_a - x_b\| + \|y_a - y_b\|$. |
+| **`is_shed_adjacent`** | `(pos: (x,y)) -> bool` | Checks if position is on any of the 4 shed-adjacent depot tiles: `(4,4), (5,4), (4,5), (5,5)`. Essential for `DROP` and `PICKUP` validity. |
+| **`get_cardinal_direction_towards`** | `(from_pos: (x,y), to_pos: (x,y)) -> str` | Computes the optimal single-step cardinal direction (`"NORTH"`, `"SOUTH"`, `"EAST"`, `"WEST"`) to move from `from_pos` toward `to_pos`, breaking distance ties deterministically. |
+| **`get_nearest_shed_tile`** | `(from_pos: (x,y)) -> (x,y)` | Finds the closest of the four shed-adjacent tiles from the unit's current position. |
+| **`get_nearest_empty_tile`** | `(from_pos, tiles, unlocked_quads, target_quad)` | Scans the board for the closest empty (`None`) tile, optionally filtered to a specific quadrant for expansion. |
+| **`get_nearest_mature_crop_tile`** | `(from_pos, tiles) -> (x,y)` | Scans $10 \times 10$ grid for the nearest living plant with `yield_units > 0` ready for immediate `HARVEST`. |
+| **`get_nearest_unwatered_crop_tile`** | `(from_pos, tiles) -> (x,y)` | Locates the closest living plant that has `watered_today == False`, ensuring daily watering bonus compliance and preventing weed transformation. |
+| **`get_nearest_weed_tile`** | `(from_pos, tiles) -> (x,y)` | Finds the closest tile infested with a weed (`kind == "WEED"`) for clearing via `DIG`. |
+
+### 3.2. Integration with Level 1 Action Dispatcher
+In every turn $t$:
+1. Spatial targets are evaluated in $O(100) \equiv O(1)$ using the scanners (`get_nearest_*`).
+2. A single step vector is produced via `get_cardinal_direction_towards`.
+3. If the unit has reached the target coordinate, the corresponding tile operation (`plant_tile`, `water_tile`, `harvest_tile`, `dig_tile`) is executed immediately.
+
+---
+
+## 4. Parameter Schema Required for 1-Step Abstraction
 
 In a single RL decision step at Abstraction Level 1, the parameter heads configure:
 
-### 3.1. Market Parameters (Processed up to 10 per turn)
-- **`hire_decision`**: $\{0, 1\}$ binary flag.
-- **`buy_land_decision`**: $\{0, 1\}$ binary flag.
+### 4.1. Market Parameters (Processed up to 10 per turn)
+- **`hire_decision`**: $\{0, 1\}$ binary flag (evaluates Fibonacci hiring curve).
+- **`buy_land_decision`**: $\{0, 1\}$ binary flag (`NE`: $1k, `SW`: $2k, `SE`: $4k).
 - **`buy_seed_order`**: `(crop: 0..4, count: 1..5)`.
 - **`buy_animal_order`**: `(animal: 0..2, count: 1)`.
-- **`buy_product_order`**: `(product: WHEAT/FERTILIZER, count: 1..10)`.
+- **`buy_product_order`**: `(product: WHEAT/FERTILIZER, count: 1..10)` (Strictly restricted to Wheat & Fertilizer).
 - **`sell_order`**: `(item: 0..8, count: 1..100)`.
 
-### 3.2. Farmer Parameters (1 Action / turn)
-- Categorical choice over 16 tactical actions:
-  `["PASS", "NORTH", "SOUTH", "EAST", "WEST", "WATER", "HARVEST", "FERTILIZE", "FEED", "CARE", "COLLECT_FERTILIZER", "DIG", "PLANT_WHEAT", "PLANT_CARROT", "BUILD_COOP", "DROP"]`.
+### 4.2. Farmer Parameters (1 Action / turn)
+- Categorical choice over 15 tactical actions:
+  `["PASS", "NORTH", "SOUTH", "EAST", "WEST", "WATER", "HARVEST", "FERTILIZE", "FEED", "CARE", "COLLECT_FERTILIZER", "DIG", "PLANT_WHEAT", "PLANT_CARROT", "BUILD_COOP"]`.
 
-### 3.3. Hired Hands Parameters (1 Action / active hand)
-- Priority work rule parameter for hands:
-  $$\text{HandPriority} \in \{\text{HARVEST} \to \text{WATER} \to \text{PLANT} \to \text{DIG} \to \text{STEP}\}$$
+### 4.3. Hired Hands Parameters (1 Action / active hand)
+- Automated priority work routine for all active hands:
+  $$\text{HandPriority}: \text{HARVEST} \to \text{WATER} \to \text{PLANT} \to \text{DIG} \to \text{STEP_TOWARDS_TARGET}$$
