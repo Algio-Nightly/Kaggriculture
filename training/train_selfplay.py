@@ -131,6 +131,7 @@ def policy_to_agent_fn(
 
 
 def run_selfplay_training(
+    model: ActorCriticNet,
     iterations: int = 20,
     steps_per_episode: int = 720,
     learning_rate: float = 3e-4,
@@ -145,9 +146,11 @@ def run_selfplay_training(
     os.makedirs(checkpoint_dir, exist_ok=True)
     rngs = nnx.Rngs(seed)
 
-    model = ActorCriticNet(rngs=rngs)
     optimizer = nnx.Optimizer(model, optax.adamw(learning_rate=learning_rate), wrt=nnx.Param)
-    arena = SelfPlayArena(living_penalty=0.05, episode_steps=steps_per_episode)
+    arena = SelfPlayArena(
+        # living_penalty=0.05, 
+        episode_steps=steps_per_episode
+        )
     pool = SnapshotPool(max_snapshots=10)
 
     key = jax.random.PRNGKey(seed)

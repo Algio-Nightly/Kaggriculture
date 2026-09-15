@@ -156,10 +156,11 @@ class NetWorthRewardTracker:
     Tracks turn-by-turn Net Worth deltas and calculates the living-penalized step reward.
     """
 
-    def __init__(self, living_penalty: float = 0.05, terminal_bonus_scale: float = 500.0):
+    def __init__(self, living_penalty: float = 0.001, terminal_bonus_scale: float = 5.0, reward_scale = 0.01):
         self.living_penalty = living_penalty
         self.terminal_bonus_scale = terminal_bonus_scale
         self.last_net_worth: Optional[float] = None
+        self.reward_scale = reward_scale
 
     def reset(self, initial_obs: Dict[str, Any]):
         """Resets tracker at the start of an episode."""
@@ -175,7 +176,7 @@ class NetWorthRewardTracker:
             self.last_net_worth = current_nw
 
         delta_nw = current_nw - self.last_net_worth
-        reward = delta_nw - self.living_penalty
+        scaled_reward = (delta_nw * self.reward_scale) - self.living_penalty
         self.last_net_worth = current_nw
 
         if is_done:
@@ -186,8 +187,8 @@ class NetWorthRewardTracker:
             margin = my_money - opp_money
             # Terminal outcome sign bonus
             if margin > 0:
-                reward += self.terminal_bonus_scale
+                scaled_reward += self.terminal_bonus_scale
             elif margin < 0:
-                reward -= self.terminal_bonus_scale
+                scaled_reward -= self.terminal_bonus_scale
 
-        return float(reward)
+        return float(scaled_reward)
