@@ -27,8 +27,9 @@ This document tracks the implementation status of all components for the Kaggric
 ---
 
 ## 3. Macro Action Scripts & Strategy Engine
-- [ ] **Action Scripts**: Deterministic pathfinding and tile-action execution subroutines (Pathfinding to shed, auto-watering loops, seed planting, animal feeding).
-- [ ] **Role of each of the Action Scripts**: High-level macro strategy executor fulfilling the Brain's daily factored decision.
+- [x] **Action Scripts (Abstraction Level 1)**: Parameterized 1-turn action primitives (`farming_ops`, `livestock_ops`, `inventory_ops`, `market_ops`, `pathfinding`) for 1-step RL execution.
+- [x] **Role of each of the Action Scripts**: 1-turn parameterized operations executing direct moves, tile operations, and market queues cross-validated against official game rules.
+- [ ] `# Abstraction Level 2 Multi-Turn Macro Scripts`: High-level multi-step sweep and goal routines (Reserved for Phase 2).
 
 ---
 
